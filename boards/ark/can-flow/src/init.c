@@ -55,8 +55,6 @@
 #include <errno.h>
 
 #include <nuttx/board.h>
-#include <nuttx/i2c/i2c_master.h>
-#include <nuttx/analog/adc.h>
 
 #include <stm32.h>
 #include "board_config.h"
@@ -89,9 +87,6 @@ stm32_boardinitialize(void)
 	stm32_configgpio(GPIO_CAN1_TX);
 
 	stm32_configgpio(GPIO_CAN1_SILENT_S0);
-
-	stm32_configgpio(GPIO_LED_SAFETY);
-	stm32_configgpio(GPIO_BTN_SAFETY);
 
 	// Configure SPI all interfaces GPIO & enable power.
 	stm32_spiinitialize();

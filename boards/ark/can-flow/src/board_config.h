@@ -47,28 +47,20 @@
 #include <nuttx/compiler.h>
 #include <stdint.h>
 
-/* BUTTON *************************************************************************** */
-#define BUTTON_SAFETY         /* PB3  */  (GPIO_INPUT|GPIO_PULLDOWN|GPIO_PORTB|GPIO_PIN3|GPIO_EXTI)
-
-#define GPIO_RGB_S            /* PB0  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTB|GPIO_PIN0)
 /* CAN Silence
  *
  * Silent mode control \ ESC Mux select
  */
-#define GPIO_CAN1_SILENT_S0  /* PB5  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTB|GPIO_PIN5)
+#define GPIO_CAN1_SILENT_S0  /* PA9  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTA|GPIO_PIN9)
 
-#define GPIO_LED_SAFETY              (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_SET|GPIO_PORTB|GPIO_PIN1)
-#define GPIO_BTN_SAFETY              (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTB|GPIO_PIN3)
+/* LEDs are driven with push open drain to support Anode to 5V or 3.3V */
 
-/* Tone alarm output. */
-#define TONE_ALARM_TIMER             2    /* timer 2 */
-#define TONE_ALARM_CHANNEL           3    /* channel 1 */
-#define GPIO_TONE_ALARM_IDLE         (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTB|GPIO_PIN10)
-#define GPIO_TONE_ALARM              (GPIO_ALT|GPIO_AF1|GPIO_SPEED_2MHz|GPIO_PUSHPULL|GPIO_PORTB|GPIO_PIN10)
+#define GPIO_nLED_RED        /* PB3 */  (GPIO_OUTPUT|GPIO_OPENDRAIN|GPIO_SPEED_50MHz|GPIO_OUTPUT_SET|GPIO_PORTB|GPIO_PIN3)
+#define GPIO_nLED_BLUE       /* PA8 */  (GPIO_OUTPUT|GPIO_OPENDRAIN|GPIO_SPEED_50MHz|GPIO_OUTPUT_SET|GPIO_PORTA|GPIO_PIN8)
 
-/* High-resolution timer */
-#define HRT_TIMER                    3  /* use timer 3 for the HRT */
-#define HRT_TIMER_CHANNEL            4  /* use capture/compare channel 4 */
+#define BOARD_HAS_CONTROL_STATUS_LEDS      1
+#define BOARD_OVERLOAD_LED     LED_RED
+#define BOARD_ARMED_STATE_LED  LED_BLUE
 
 __BEGIN_DECLS
 

@@ -36,8 +36,6 @@ if("${PX4_BOARD_LABEL}" STREQUAL  "canbootloader")
 	add_library(drivers_board
 		boot_config.h
 		boot.c
-		led.c
-		led.h
 	)
 	target_link_libraries(drivers_board
 		PRIVATE
@@ -50,7 +48,6 @@ if("${PX4_BOARD_LABEL}" STREQUAL  "canbootloader")
 else()
 	add_library(drivers_board
 		can.c
-		i2c.cpp
 		init.c
 		spi.cpp
 	)
