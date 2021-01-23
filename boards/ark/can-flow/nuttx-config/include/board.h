@@ -52,14 +52,14 @@
  * Definitions
  ************************************************************************************/
 
-/* HSI - 16 MHz RC factory-trimmed
+/* HSI - 8 MHz RC factory-trimmed
  * LSI - 32 KHz RC
  * HSE - 8  MHz Crystal
  * LSE - not installed
  */
 
 #define STM32_BOARD_USEHSE      1
-#define STM32_BOARD_XTAL        8000000ul
+#define STM32_BOARD_XTAL        8000000
 #define STM32_HSE_FREQUENCY     STM32_BOARD_XTAL
 
 #define STM32_HSI_FREQUENCY     16000000ul
@@ -110,6 +110,8 @@
 #define STM32_APB2_TIM1_CLKIN   (STM32_PCLK2_FREQUENCY)
 #define STM32_APB2_TIM8_CLKIN   (STM32_PCLK2_FREQUENCY)
 #define STM32_APB2_TIM9_CLKIN   (STM32_PCLK2_FREQUENCY)
+#define STM32_APB2_TIM10_CLKIN  (STM32_PCLK2_FREQUENCY)
+#define STM32_APB2_TIM11_CLKIN  (STM32_PCLK2_FREQUENCY)
 
 /* Timer Frequencies, if APBx is set to 1, frequency is same to APBx
  * otherwise frequency is 2xAPBx.
@@ -120,13 +122,9 @@
 #define BOARD_TIM3_FREQUENCY    (2 * STM32_PCLK1_FREQUENCY)
 #define BOARD_TIM4_FREQUENCY    (2 * STM32_PCLK1_FREQUENCY)
 #define BOARD_TIM5_FREQUENCY    (2 * STM32_PCLK1_FREQUENCY)
-#define BOARD_TIM12_FREQUENCY   (2 * STM32_PCLK1_FREQUENCY)
-#define BOARD_TIM13_FREQUENCY   (2 * STM32_PCLK1_FREQUENCY)
-#define BOARD_TIM14_FREQUENCY   (2 * STM32_PCLK1_FREQUENCY)
-
-#define BOARD_TIM1_FREQUENCY    (STM32_PCLK2_FREQUENCY)
-#define BOARD_TIM8_FREQUENCY    (STM32_PCLK2_FREQUENCY)
-#define BOARD_TIM9_FREQUENCY    (STM32_PCLK2_FREQUENCY)
+#define BOARD_TIM6_FREQUENCY    (2 * STM32_PCLK1_FREQUENCY)
+#define BOARD_TIM7_FREQUENCY    (2 * STM32_PCLK1_FREQUENCY)
+#define BOARD_TIM8_FREQUENCY    (2 * STM32_PCLK2_FREQUENCY)
 
 /* Alternate function pin selections ************************************************/
 
@@ -139,8 +137,8 @@
 #define GPIO_CAN1_TX	GPIO_CAN1_TX_2
 
 /* I2C */
-#define GPIO_I2C1_SCL		GPIO_I2C1_SCL_1
-#define GPIO_I2C1_SDA		GPIO_I2C1_SDA_1
+#define GPIO_I2C1_SCL	GPIO_I2C1_SCL_1
+#define GPIO_I2C1_SDA	GPIO_I2C1_SDA_1
 
 /* SPI */
 #define GPIO_SPI1_MISO  (GPIO_SPI1_MISO_1|GPIO_SPEED_50MHz)
