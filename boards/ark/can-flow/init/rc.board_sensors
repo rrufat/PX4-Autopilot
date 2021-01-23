@@ -4,5 +4,6 @@
 #------------------------------------------------------------------------------
 
 # Internal SPI
-ms5611 -s start
-rm3100 -s start
+paw3902 -s start
+bmi088 -A -s -R 0 start
+bmi088 -G -s -R 0 start
