@@ -181,20 +181,20 @@ size_t board_get_hardware_version(uavcan_HardwareVersion_t *hw_version)
 
 void board_indicate(uiindication_t indication)
 {
-	// switch(indication) {
-	// 	case off:
-	// 		led_off(GPIO_nLED_RED);
-	// 		led_off(GPIO_nLED_BLUE);
-	// 		break;
-	// 	case reset:
-	// 		led_on(GPIO_nLED_RED);
-	// 		led_on(GPIO_nLED_BLUE);
-	// 		break;
-	// 	case jump_to_app:
-	// 		led_on(GPIO_nLED_RED);
-	// 		led_off(GPIO_nLED_BLUE);
-	// 		break;
-	// 	default:
-	// 		break;
-	// }
+	switch(indication) {
+		case off:
+			led_off(GPIO_nLED_RED);
+			led_off(GPIO_nLED_BLUE);
+			break;
+		case reset:
+			led_on(GPIO_nLED_RED);
+			led_on(GPIO_nLED_BLUE);
+			break;
+		case jump_to_app:
+			led_on(GPIO_nLED_RED);
+			led_off(GPIO_nLED_BLUE);
+			break;
+		default:
+			break;
+	}
 }
