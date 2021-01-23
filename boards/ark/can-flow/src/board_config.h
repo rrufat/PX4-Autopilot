@@ -49,9 +49,15 @@
 
 /* CAN Silence
  *
- * Silent mode control \ ESC Mux select
+ * Silent mode control
  */
 #define GPIO_CAN1_SILENT_S0  /* PA9  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTA|GPIO_PIN9)
+
+/* CAN Termination
+ *
+ * CAN termination software control
+ */
+#define GPIO_CAN1_TERMINATION  /* PB13  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTB|GPIO_PIN13)
 
 /* Boot config */
 #define GPIO_BOOT_CONFIG  /* PC15  */ (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTC|GPIO_PIN15|GPIO_EXTI)

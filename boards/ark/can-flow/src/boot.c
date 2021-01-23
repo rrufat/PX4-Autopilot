@@ -65,6 +65,7 @@ __EXPORT void stm32_boardinitialize(void)
 	stm32_configgpio(GPIO_CAN1_RX);
 	stm32_configgpio(GPIO_CAN1_TX);
 	stm32_configgpio(GPIO_CAN1_SILENT_S0);
+	stm32_configgpio(GPIO_CAN1_TERMINATION);
 	putreg32(getreg32(STM32_RCC_APB1RSTR) | RCC_APB1RSTR_CAN1RST, STM32_RCC_APB1RSTR);
 	putreg32(getreg32(STM32_RCC_APB1RSTR) & ~RCC_APB1RSTR_CAN1RST, STM32_RCC_APB1RSTR);
 
@@ -177,10 +178,10 @@ size_t board_get_hardware_version(uavcan_HardwareVersion_t *hw_version)
 
 // };
 
-// void board_indicate(uiindication_t indication)
-// {
-// 	rgb_led(i2l[indication].red,
-// 		i2l[indication].green,
-// 		i2l[indication].blue,
-// 		i2l[indication].hz);
-// }
+void board_indicate(uiindication_t indication)
+{
+	// rgb_led(i2l[indication].red,
+	// 	i2l[indication].green,
+	// 	i2l[indication].blue,
+	// 	i2l[indication].hz);
+}
