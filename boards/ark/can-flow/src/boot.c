@@ -42,6 +42,7 @@
 #include <stdint.h>
 #include "boot_config.h"
 #include "board.h"
+#include "led.c"
 
 #include <debug.h>
 #include <string.h>
@@ -180,8 +181,20 @@ size_t board_get_hardware_version(uavcan_HardwareVersion_t *hw_version)
 
 void board_indicate(uiindication_t indication)
 {
-	// rgb_led(i2l[indication].red,
-	// 	i2l[indication].green,
-	// 	i2l[indication].blue,
-	// 	i2l[indication].hz);
+	switch(indication) {
+		case off:
+			led_off(GPIO_nLED_RED);
+			led_off(GPIO_nLED_BLUE);
+			break;
+		case reset:
+			led_on(GPIO_nLED_RED);
+			led_on(GPIO_nLED_BLUE);
+			break;
+		case jump_to_app:
+			led_on(GPIO_nLED_RED);
+			led_off(GPIO_nLED_BLUE);
+			break;
+		default:
+			break;
+	}
 }
