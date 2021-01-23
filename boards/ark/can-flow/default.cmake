@@ -33,16 +33,16 @@ px4_add_board(
 		optical_flow/paw3902
 		uavcannode
 	MODULES
-		#ekf2
-		#load_mon
-		sensors
+		# ekf2
+		# load_mon
+		# sensors
 	SYSTEMCMDS
-		led_control
 		param
 		perf
 		reboot
 		top
 		topic_listener
+		tune_control
 		ver
 		work_queue
 )
