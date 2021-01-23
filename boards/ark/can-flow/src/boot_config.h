@@ -133,4 +133,4 @@
 /* Bootloader Option*****************************************************************
  *
  */
-#define GPIO_GETNODEINFO_JUMPER (BUTTON_SAFETY & ~GPIO_EXTI)
+#define GPIO_GETNODEINFO_JUMPER (GPIO_BOOT_CONFIG & ~GPIO_EXTI)
