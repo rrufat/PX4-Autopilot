@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (c) 2019 PX4 Development Team. All rights reserved.
+ *   Copyright (c) 2013 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -34,7 +34,7 @@
 /**
  * @file led.c
  *
- * ARK Flow LED backend.
+ * PX4FMU LED backend.
  */
 
 #include <px4_platform_common/px4_config.h>
@@ -47,7 +47,7 @@
 #include <arch/board/board.h>
 
 /*
- * Ideally we'd be able to get these from arm_internal.h,
+ * Ideally we'd be able to get these from up_internal.h,
  * but since we want to be able to disable the NuttX use
  * of leds for system indication at will and there is no
  * separate switch, we need to build independent of the
@@ -60,11 +60,9 @@ extern void led_off(int led);
 extern void led_toggle(int led);
 __END_DECLS
 
-
-
 static uint32_t g_ledmap[] = {
-	GPIO_nLED_BLUE,    // Indexed by LED_BLUE
-	GPIO_nLED_RED,     // Indexed by LED_RED, LED_AMBER
+	GPIO_nLED_RED,
+	GPIO_nLED_BLUE,
 };
 
 __EXPORT void led_init(void)
@@ -72,6 +70,7 @@ __EXPORT void led_init(void)
 	/* Configure LED GPIOs for output */
 	for (size_t l = 0; l < (sizeof(g_ledmap) / sizeof(g_ledmap[0])); l++) {
 		stm32_configgpio(g_ledmap[l]);
+		stm32_gpiowrite(g_ledmap[l], true);
 	}
 }
 
@@ -99,6 +98,5 @@ __EXPORT void led_off(int led)
 
 __EXPORT void led_toggle(int led)
 {
-
 	phy_set_led(led, !phy_get_led(led));
 }

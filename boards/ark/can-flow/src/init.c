@@ -87,6 +87,7 @@ stm32_boardinitialize(void)
 	stm32_configgpio(GPIO_CAN1_TX);
 
 	stm32_configgpio(GPIO_CAN1_SILENT_S0);
+	stm32_configgpio(GPIO_CAN1_TERMINATION);
 
 	// Configure SPI all interfaces GPIO & enable power.
 	stm32_spiinitialize();
