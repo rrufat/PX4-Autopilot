@@ -35,14 +35,14 @@ px4_add_board(
 	MODULES
 		# ekf2
 		# load_mon
-		# sensors
+		sensors
 	SYSTEMCMDS
+		mtd
 		param
 		perf
 		reboot
 		top
 		topic_listener
-		tune_control
 		ver
 		work_queue
 )

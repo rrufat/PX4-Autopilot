@@ -7,3 +7,5 @@
 paw3902 -s start
 bmi088 -A -s -R 0 start
 bmi088 -G -s -R 0 start
+
+sensors start

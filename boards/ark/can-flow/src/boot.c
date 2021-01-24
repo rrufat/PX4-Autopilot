@@ -42,7 +42,6 @@
 #include <stdint.h>
 #include "boot_config.h"
 #include "board.h"
-//#include "led.c"
 
 #include <debug.h>
 #include <string.h>

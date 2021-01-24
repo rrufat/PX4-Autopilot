@@ -61,8 +61,8 @@ extern void led_toggle(int led);
 __END_DECLS
 
 static uint32_t g_ledmap[] = {
-	GPIO_nLED_RED,
-	GPIO_nLED_BLUE,
+	GPIO_LED_RED,
+	GPIO_LED_BLUE,
 };
 
 __EXPORT void led_init(void)
