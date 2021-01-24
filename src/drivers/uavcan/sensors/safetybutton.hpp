@@ -38,10 +38,8 @@
 #pragma once
 
 #include <uORB/Subscription.hpp>
-#include <uORB/Publication.hpp>
+#include <uORB/PublicationMulti.hpp>
 #include <uORB/topics/safety.h>
-
-#include <drivers/drv_orb_dev.h>
 
 #include <uavcan/uavcan.hpp>
 #include <ardupilot/indication/Button.hpp>
@@ -64,7 +62,7 @@ public:
 	void print_status() const override;
 private:
 	safety_s _safety{};  //
-	bool		_safety_disabled{false};
+	bool _safety_disabled{false};
 
 	bool _safety_btn_off{false};		///< State of the safety button read from the HW button
 	void safety_sub_cb(const uavcan::ReceivedDataStructure<ardupilot::indication::Button> &msg);
@@ -77,7 +75,5 @@ private:
 	uavcan::Subscriber<ardupilot::indication::Button, SafetyCommandCbBinder> _sub_safety;
 	uavcan::Publisher<ardupilot::indication::Button> _pub_safety;
 
-	uORB::Subscription		_safety_sub{ORB_ID(safety)};
-	uORB::Publication<safety_s>	_to_safety{ORB_ID(safety)};
-
+	uORB::PublicationMulti<safety_s> _safety_pub{ORB_ID(safety)};
 };
