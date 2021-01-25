@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (c) 2020 PX4 Development Team. All rights reserved.
+ *   Copyright (c) 2021 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -37,7 +37,6 @@
  * @author CUAVcaijie <caijie@cuav.net>
  */
 
-
 #include "beep.hpp"
 
 UavcanBeep::UavcanBeep(uavcan::INode &node) :
@@ -51,7 +50,6 @@ int UavcanBeep::init()
 	/*
 	 * Setup timer and call back function for periodic updates
 	 */
-
 	if (!_timer.isRunning()) {
 		_timer.setCallback(TimerCbBinder(this, &UavcanBeep::periodic_update));
 		_timer.startPeriodic(uavcan::MonotonicDuration::fromMSec(1000 / MAX_RATE_HZ));
@@ -70,35 +68,35 @@ void UavcanBeep::periodic_update(const uavcan::TimerEvent &)
 		}
 	}
 
-	if ((hrt_absolute_time() - interval_timestamp <= duration)
-	    || (!_play_tone)) {
+	const hrt_abstime timestamp_now = hrt_absolute_time();
+
+	if ((timestamp_now - _interval_timestamp <= _duration) || !_play_tone) {
 		return;
 	}
 
-	interval_timestamp = hrt_absolute_time();
+	_interval_timestamp = timestamp_now;
 
 	if (_silence_length > 0) {
-		duration = _silence_length;
+		_duration = _silence_length;
 		_silence_length = 0;
 
 	} else if (_play_tone) {
-		int  parse_ret_val = (int) _tunes.get_next_note(frequency, duration, _silence_length);
+		Tunes::Status parse_ret_val = _tunes.get_next_note(_frequency, _duration, _silence_length);
 
-		if (parse_ret_val > 0) {
+		if (parse_ret_val == Tunes::Status::Continue) {
 			// Continue playing.
 			_play_tone = true;
 
-			if (frequency > 0) {
+			if (_frequency > 0) {
 				// Start playing the note.
-				uavcan::equipment::indication::BeepCommand cmd;
-				cmd.frequency = frequency;
-				cmd.duration = duration / 1000000.f;
-				(void)_beep_pub.broadcast(cmd);
+				uavcan::equipment::indication::BeepCommand cmd{};
+				cmd.frequency = _frequency;
+				cmd.duration = _duration / 1000000.f;
+				_beep_pub.broadcast(cmd);
 			}
 
 		} else {
 			_play_tone = false;
 		}
-
 	}
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
 *
-*   Copyright (c) 2020 PX4 Development Team. All rights reserved.
+*   Copyright (c) 2021 PX4 Development Team. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -40,7 +40,6 @@
  *
  */
 
-
 #pragma once
 
 #include <uavcan/uavcan.hpp>
@@ -48,7 +47,6 @@
 #include <uORB/Subscription.hpp>
 #include <uORB/topics/tune_control.h>
 #include <lib/tunes/tunes.h>
-
 
 class UavcanBeep
 {
@@ -62,7 +60,7 @@ public:
 
 private:
 	/*
-	 * Max update rate to avoid exessive bus traffic
+	 * Max update rate to avoid excessive bus traffic
 	 */
 	static constexpr unsigned MAX_RATE_HZ = 100;
 
@@ -71,8 +69,7 @@ private:
 	 */
 	void periodic_update(const uavcan::TimerEvent &);
 
-	typedef uavcan::MethodBinder<UavcanBeep *, void (UavcanBeep::*)(const uavcan::TimerEvent &)>
-	TimerCbBinder;
+	typedef uavcan::MethodBinder<UavcanBeep *, void (UavcanBeep::*)(const uavcan::TimerEvent &)> TimerCbBinder;
 
 	/*
 	 * Subscription tune_control
@@ -86,12 +83,11 @@ private:
 
 	uavcan::TimerEventForwarder<TimerCbBinder> _timer;
 
-	hrt_abstime interval_timestamp{0};
+	hrt_abstime _interval_timestamp{0};
 	tune_control_s _tune{};
-	Tunes _tunes = Tunes();
+	Tunes _tunes{};
 	bool _play_tone{false};
 	unsigned int _silence_length{0};	///< If nonzero, silence before next note.
-	unsigned int frequency{0};
-	unsigned int duration{0};
-
+	unsigned int _frequency{0};
+	unsigned int _duration{0};
 };
